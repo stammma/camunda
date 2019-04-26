@@ -1,0 +1,27 @@
+spring.application.name: CamundaExampleApplication
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://mysql:3306/camunda
+    username: camunda
+    password: camunda
+
+ods:
+  mongodb:
+    host: mongodb
+    port: 27017
+    db: camunda
+    username: camunda
+    password: camunda
+
+server:
+  port: 8090
+
+camunda:
+  bpm:
+    job-execution.deployment-aware: true
+
+job.executor:
+  maxWaitInMillis: 5000
+  waitTimeInMillis: 3000

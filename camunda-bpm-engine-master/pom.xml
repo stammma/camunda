@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>ch.helsana.bpm</groupId>
+    <artifactId>camunda-example-app</artifactId>
+    <version>0.1.0</version>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.4.RELEASE</version>
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <camel.version>2.23.2</camel.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.camunda.bpm.springboot</groupId>
+            <artifactId>camunda-bpm-spring-boot-starter</artifactId>
+            <version>3.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-spring-boot-starter</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-mongodb-starter</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+        <dependency>
+		    <groupId>org.apache.camel</groupId>
+			<artifactId>camel-cxf</artifactId>
+            <version>${camel.version}</version>
+		</dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-gson</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-codegen-plugin</artifactId>
+            <version>3.3.1</version>
+            <type>maven-plugin</type>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.21</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-codegen-plugin</artifactId>
+				<version>3.3.1</version>
+				<executions>
+					<execution>
+						<id>generate-sources</id>
+						<phase>generate-sources</phase>
+						<configuration>
+							<!-- Maven auto-compiles any source files under target/generated-sources/ -->
+							<sourceRoot>${project.basedir}/target/generated-sources/jaxws</sourceRoot>
+							<wsdlOptions>
+								<wsdlOption>
+									<wsdl>${project.basedir}/src/main/resources/wsdl/BLZService.wsdl</wsdl>
+								</wsdlOption>
+							</wsdlOptions>
+						</configuration>
+						<goals>
+							<goal>wsdl2java</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+    </build>
+</project>
